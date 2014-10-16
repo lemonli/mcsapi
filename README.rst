@@ -1,5 +1,5 @@
-MOS云主机(MCS) API规范
-======================
+云主机API
+=============
 
 MOS云主机 (MCS, Meituan Compute Service)
 提供EC2兼容的API访问接口，以方便用户自动化管理云主机。
@@ -15,7 +15,7 @@ API概述
 
 接口支持GET和POST两种方式。参数以key-value形式通过x-form-url-encoded格式编码提交。例如::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         Action=DescribeTemplates&
         AWSAccessKeyId=4ba303cc17454cc7904e044db2a3c912&
         SignatureVersion=2&
@@ -56,9 +56,9 @@ API概述
 ~~~~~~~~~~~~~~~~
 
 MOS开放API需要签名，遵循"`AWS API 2.0签名规范 <http://docs.aws.amazon.com/general/latest/gr/signature-version-2.html>`_"。
-需要将请求内容按如下方法拼接，并按照指定Hash算法获得base64编码的签名字符串：
+需要将请求内容按如下方法拼接，并按照指定Hash算法获得base64编码的签名字符串:
 
-1. 全部字母大写的HTTP请求方法（GET或POST)，以换行(\\n)结束。例如::
+1. 全部字母大写的HTTP请求方法（GET或POST)，以换行(\\n)结束。例如::
 
     POST\n
 
@@ -79,7 +79,7 @@ MOS开放API需要签名，遵循"`AWS API 2.0签名规范 <http://docs.aws.amaz
     POST
     mos-api.meituan.com
     /
-    AWSAccessKeyId=4ba303cc17454cc79............ersion=2&Timestamp=2013-07-20T15%3A28%3A04.000Z
+    AWSAccessKeyId=4ba303cc17454cc7904e044db2a3c912&Action=DescribeTemplates&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2013-07-20T15%3A28%3A04.000Z
 
 5. 最后，以SECRET为Key对上述字符串以SHA256算法进行Hash后获得签名，结果为::
 
@@ -154,7 +154,7 @@ DescribeTemplates
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         Action=DescribeTemplates&
         AUTHDATA
 
@@ -257,7 +257,7 @@ InstanceType包含如下子段：
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         Limit=1&
         Action=DescribeInstanceTypes&
         AUTHDATA
@@ -336,7 +336,7 @@ GetBalance
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         Action=GetBalance&
         AUTHDATA
 
@@ -416,7 +416,7 @@ KeyPair包含的字段：
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         Action=DescribeKeyPairs&
         AUTHDATA
 
@@ -495,7 +495,7 @@ ImportKeyPair
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         KeyName=newkey&
         Action=ImportKeyPair&
         PublicKeyMaterial=ssh-rsa+AAAAB3Nza...OVL%2B2Y7R+qj%40dog%0A&
@@ -550,7 +550,7 @@ DeleteKeyPair
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         KeyName=newkey&
         Action=DeleteKeyPair&
         AUTHDATA
@@ -645,7 +645,7 @@ Instance包含的字段：
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         Limit=1&
         Offset=2&
         Action=DescribeInstances&
@@ -721,7 +721,7 @@ DescribeInstanceStatus
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=testtest&
         Action=DescribeInstanceStatus&
         AUTHDATA
@@ -799,7 +799,7 @@ InstanceVolume包含如下字段信息：
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=testtest&
         Action=DescribeInstanceVolumes&
         AUTHDATA
@@ -900,7 +900,7 @@ InstanceNetworkInterface包含如下信息：
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=testtest&
         Action=DescribeInstanceNetworkInterfaces&
         AUTHDATA
@@ -986,7 +986,7 @@ GetPasswordData
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=system&
         Action=GetPasswordData&
         AUTHDATA
@@ -1046,7 +1046,7 @@ GetInstanceContractInfo
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=system&
         Action=GetInstanceContractInfo&
         AUTHDATA
@@ -1096,7 +1096,7 @@ StartInstance
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=system&
         Action=StartInstance&
         AUTHDATA
@@ -1144,7 +1144,7 @@ StopInstance
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=system&
         Action=StopInstance&
         AUTHDATA
@@ -1190,7 +1190,7 @@ RebootInstance
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=system&
         Action=RebootInstance&
         AUTHDATA
@@ -1213,9 +1213,7 @@ json响应
         }
     }
 
-RebuildInstanceRootImage
-~~~~~~~~~~~~~~~~~~~~~~~~
-
+RebuildInstanceRootImage ~~~~~~~~~~~~~~~~~~~~~~~~ 
 重置指定虚拟机实例的的系统磁盘镜像。
 
 **请求参数：**
@@ -1239,7 +1237,7 @@ RebuildInstanceRootImage
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=system&
         Action=RebuildInstanceRootImage&
         AUTHDATA
@@ -1269,19 +1267,23 @@ CreateInstance
 
 **请求参数：**
 
-+--------------+--------+------+------------------------------------------------------------------+
-| 参数名       | 类型   | 可选 | 说明                                                             |
-+==============+========+======+==================================================================+
-| ImageId      | string | 必须 | 镜像模板ID                                                       |
-+--------------+--------+------+------------------------------------------------------------------+
-| InstanceType | string | 必须 | 创建的虚拟机类型ID或名称                                         |
-+--------------+--------+------+------------------------------------------------------------------+
-| Duration     | string | 可选 | 创建的虚拟机的时间，格式为数字\+H/M，例如1H, 72H或者1M。缺省为1M |
-+--------------+--------+------+------------------------------------------------------------------+
-| InstanceName | string | 可选 | 指定创建的虚拟机的名称                                           |
-+--------------+--------+------+------------------------------------------------------------------+
-| KeyName      | string | 可选 | 指定创建的虚拟机使用的SSH Keypair                                |
-+--------------+--------+------+------------------------------------------------------------------+
++------------------+---------+------+------------------------------------------------------------------------------------+
+| 参数名           | 类型    | 可选 | 说明                                                                               |
++==================+=========+======+====================================================================================+
+| ImageId          | string  | 必须 | 镜像模板ID                                                                         |
++------------------+---------+------+------------------------------------------------------------------------------------+
+| InstanceType     | string  | 必须 | 创建的虚拟机类型ID或名称                                                           |
++------------------+---------+------+------------------------------------------------------------------------------------+
+| Duration         | string  | 可选 | 创建的虚拟机的时间，格式为数字\+H/M，例如1H, 72H或者1M。缺省为1M                   |
++------------------+---------+------+------------------------------------------------------------------------------------+
+| InstanceName     | string  | 可选 | 指定创建的虚拟机的名称                                                             |
++------------------+---------+------+------------------------------------------------------------------------------------+
+| KeyName          | string  | 可选 | 指定创建的虚拟机使用的SSH Keypair                                                  |
++------------------+---------+------+------------------------------------------------------------------------------------+
+| ExtraExtDisksize | integer | 可选 | 指定创建的虚拟机使用的额外磁盘，单位为GB，不足10GB的部分按10GB计费（1.0.1版本新增）|
++------------------+---------+------+------------------------------------------------------------------------------------+
+| ExtraExtBandwidth| integer | 可选 | 指定创建的虚拟机使用的额外带宽，单位Mbps（1.0.1版本新增）                          |
++------------------+---------+------+------------------------------------------------------------------------------------+
 
 **返回数据：**
 
@@ -1315,7 +1317,7 @@ CreateInstance
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         ImageId=d1620e45-c561-42e7-a2a4-53ae0a389bb9&
         Duration=72H&
         InstanceType=small_net&
@@ -1373,7 +1375,7 @@ TerminateInstance
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=system&
         Action=TerminateInstance&
         AUTHDATA
@@ -1422,7 +1424,7 @@ RenewInstance
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=system&
         Duration=72H&
         Action=RenewInstance&
@@ -1472,7 +1474,7 @@ ChangeInstanceType
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=system&
         Action=ChangeInstanceType&
         InstanceType=small_net&
@@ -1520,7 +1522,7 @@ GetInstanceMetadata
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=system&
         Action=GetInstanceMetadata&
         AUTHDATA
@@ -1578,7 +1580,7 @@ PutInstanceMetadata
 
 ::
 
-    https://10.168.44.160:8883?
+    https://mosapi.meituan.com/mcs/v1?
         InstanceId=system&
         Name.1=test7d&
         Value.1=1&
